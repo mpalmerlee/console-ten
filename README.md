@@ -3,8 +3,8 @@ console-ten
 
 Console-TEN is a simple console Timestamp Extension for Node.js
 
-It prepends a timestamp and log type for console.log type functions (error, warn, info, log)
-Tt also allows disabling some logging by setting a log level
+It prepends a timestamp and log type for console.log type functions (error, warn, info, log).
+It also allows disabling some logging by setting a log level.
 
 Install
 -------
