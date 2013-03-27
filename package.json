@@ -1,0 +1,23 @@
+{
+  "name": "console-ten",
+  "version": "0.0.1",
+  "description": "Console-Ten is a simple console logging extension for node.js, it adds Timestamps and log type to the output.",
+  "main": "index.js",
+  "scripts": {
+    "test": "for f in tests/*; do echo \\\"$f\\\"; node \\\"$f\\\"; done; echo 'passed!'; exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mpalmerlee/console-ten"
+  },
+  "keywords": [
+    "console",
+    "log",
+    "logger",
+    "logging",
+    "timestamp",
+    "console.log"
+  ],
+  "author": "Matt Palmerlee",
+  "license": "BSD"
+}
