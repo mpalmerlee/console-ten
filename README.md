@@ -15,7 +15,7 @@ Install
 Usage
 -----
 ```javascript
-require('../').init(console);
+require('console-ten').init(console);
 console.log("Hello Node!", {'i':'love','json':'!'});
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "console-ten",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Console-Ten is a simple console logging extension for node.js, it adds Timestamps and log type to the output.",
   "main": "index.js",
   "scripts": {
