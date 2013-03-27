@@ -5,4 +5,7 @@ consoleTEN.init(console);
 
 ['error','warn','log','info','trace','debug'].forEach(function(f) {
   console[f]('Hello Console-TEN!', {'testing':f});
+
 });
+
+console.log("Hello Node!", {'i':'love','json':'!'});
