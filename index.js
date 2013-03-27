@@ -6,23 +6,26 @@
  */
 
 var TYPES = [
-    {n:'ERROR',l:1,f:'error'},
-    {n:'WARNING',l:2,f:'warn'},
-    {n:'LOG',l:3,f:'log'}, //considered "NOTICE" loglevel?
-    {n:'INFO',l:4,f:'info'},
-    {n:'TRACE',l:5,f:'trace'},
-    {n:'DEBUG',l:6,f:'debug'}
+    {n:'ERROR',l:1,f:'error',p:'error'},
+    {n:'WARNING',l:2,f:'warn',p:'warn'},
+    {n:'LOG',l:3,f:'log',p:'log'}, //considered "NOTICE" loglevel?
+    {n:'INFO',l:4,f:'info',p:'info'},
+    {n:'TRACE',l:5,f:'trace',p:'trace'},
+    {n:'DEBUG',l:6,f:'debug',p:'log'}//NOTE: console.debug is deprecated so we'll call console.log
 ];
 
 exports.init = function(consoleObj, loglevel){
     loglevel = loglevel || TYPES.length;
     TYPES.forEach(function(td){
-        var orig = consoleObj[td.f];
+        var orig = consoleObj[td.p];
+        //console.log(orig, td.f);
         consoleObj[td.f] = function(){
             if(loglevel < td.l)
                 return;
             [].unshift.call(arguments, (new Date().toISOString()) + " [" + td.n + "] : ");
             return orig.apply(consoleObj, arguments);
+            //console.log(arguments, td.f);
+
         }
     });
 };

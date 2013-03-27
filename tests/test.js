@@ -3,6 +3,6 @@
 var consoleTEN = require('../');
 consoleTEN.init(console);
 
-['debug'].forEach(function(f) {
+['error','warn','log','info','trace','debug'].forEach(function(f) {
   console[f]('Hello Console-TEN!', {'testing':f});
 });
