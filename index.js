@@ -8,7 +8,7 @@
 var TYPES = [
     {n:'ERROR',l:1,f:'error'},
     {n:'WARNING',l:2,f:'warn'},
-    //{n:'LOG',l:3,f:'log'}, //considered "NOTICE" loglevel?
+    {n:'LOG',l:3,f:'log'}, //considered "NOTICE" loglevel?
     {n:'INFO',l:4,f:'info'},
     {n:'TRACE',l:5,f:'trace'},
     {n:'DEBUG',l:6,f:'debug'}
