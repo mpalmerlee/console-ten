@@ -6,7 +6,7 @@
  */
 
 //NOTE: console.trace currently calls console.error so we won't override that
-var TYPES = [
+var overrides = [
     {n:'DEBUG',l:5,f:'debug',p:'log'},//NOTE: console.debug is deprecated so we'll call console.log
 
     {n:'ERROR',l:1,f:'error',p:'error'},
@@ -15,9 +15,20 @@ var TYPES = [
     {n:'INFO',l:4,f:'info',p:'info'}
 ];
 
+var LEVELS = {
+    'ERROR':1,
+    'WARNING':2,
+    'LOG':3,
+    'INFO':4,
+    'DEBUG':5,
+    'ALL':6,
+};
+
+exports.LEVELS = LEVELS;
+
 exports.init = function(consoleObj, loglevel){
-    loglevel = loglevel || TYPES.length;
-    TYPES.forEach(function(td){
+    loglevel = loglevel || LEVELS.ALL;
+    overrides.forEach(function(td){
         var orig = consoleObj[td.p];
         consoleObj[td.f] = function(){
             if(loglevel < td.l)
