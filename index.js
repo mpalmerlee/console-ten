@@ -2,27 +2,29 @@
  * Console TEN (Console Timestamp Extension for Node)
  * This is a simple extension on top of console.log type functions
  *      It's main purpose is to prepend everything logged with a timestamp and a log type
- *      Eventually it should allow users to disable some logging by setting a log level
+ *      Tt also allows users to disable some logging by setting a log level
  */
 
-var TYPES = {
-    'ERROR':1,
-    'WARNING':2,
-    'INFO':3,
-    'LOG':4, //considered "NOTICE" level?
-    'TRACE':5,
-    'DEBUG':6
-};
+var TYPES = [
+    {n:'ERROR',l:1,f:'error'},
+    {n:'WARNING',l:2,f:'warn'},
+    //{n:'LOG',l:3,f:'log'}, //considered "NOTICE" loglevel?
+    {n:'INFO',l:4,f:'info'},
+    {n:'TRACE',l:5,f:'trace'},
+    {n:'DEBUG',l:6,f:'debug'}
+];
 
-exports.init = function(console){
-    for(var n in TYPES){
-        var f = n.toLowerCase();
-        var orig = console[f];
-        console[f] = function(){
-            [].unshift.call(arguments, (new Date().toISOString()) + " [" + n + "] : ");
-            return orig.apply(console, arguments);
+exports.init = function(consoleObj, loglevel){
+    loglevel = loglevel || TYPES.length;
+    TYPES.forEach(function(td){
+        var orig = consoleObj[td.f];
+        consoleObj[td.f] = function(){
+            if(loglevel < td.l)
+                return;
+            [].unshift.call(arguments, (new Date().toISOString()) + " [" + td.n + "] : ");
+            return orig.apply(consoleObj, arguments);
         }
-    }
+    });
 };
 
 /*
