@@ -16,13 +16,13 @@ Usage
 -----
 ```javascript
 require('console-ten').init(console);
-console.log("Hello Node!", {'i':'love','json':'!'});
+console.log("Hello %s", "Node!", {'i':'love','json':'!'});
 ```
 
 Example Output
 --------------
 ```bash
-> 2013-01-01T00:00:00.000Z [LOG] :  Hello Node! { i: 'love', json: '!' }
+> [2013-01-01T00:00:00.000Z] [LOG] Hello Node! { i: 'love', json: '!' }
 ```
 
 Log Levels
@@ -49,4 +49,22 @@ LEVELS = {
 };
 ```
 
+Custom log format
+-----------------
+You can easily override or customize the format and the information appended to the console.log functions by passing a format function to the init method:
+```javascript
+var consoleTEN = require('console-ten');
+consoleTEN.init(console, consoleTEN.LEVELS.ALL, function(levelName){
+	return "[" + (new Date().toString()) + "] [" + levelName.toLowerCase() + "] - ";
+});
+```
+Note: the levelName is passed into the format function by default.
+After applying this new format function our output looks more like this:
+```bash
+> [Sat Mar 30 2013 15:54:08 GMT-0700 (PDT)] [error] Hello Node! { i: 'love', json: '!' }
+```
 
+
+License
+-------
+MIT Licensed

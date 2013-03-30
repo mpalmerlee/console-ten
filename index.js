@@ -26,15 +26,24 @@ var LEVELS = {
 
 exports.LEVELS = LEVELS;
 
-exports.init = function(consoleObj, loglevel){
+exports.init = function(consoleObj, loglevel, prependFunction){
     loglevel = loglevel || LEVELS.ALL;
+    prependFunction = prependFunction || defaultPrependFunction;
     overrides.forEach(function(td){
         var orig = consoleObj[td.p];
         consoleObj[td.f] = function(){
             if(loglevel < td.l)
                 return;
-            [].unshift.call(arguments, (new Date().toISOString()) + " [" + td.n + "] : ");
+            //so that the default formatting works with console functions, if the first argument is a string we'll prepend
+            if(arguments && arguments.length > 0 && typeof arguments[0] == "string")
+                arguments[0] = prependFunction(td.n) + arguments[0];
+            else
+                [].unshift.call(arguments, prependFunction(td.n));
             return orig.apply(consoleObj, arguments);
         }
     });
 };
+
+var defaultPrependFunction = function(levelName){
+    return "[" + (new Date().toISOString()) + "] [" + levelName + "] ";
+}
